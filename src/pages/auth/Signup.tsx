@@ -11,19 +11,20 @@ function Signup() {
 
   const navigate = useNavigate();
 
-  const [email,setEmail] =
+
+  const [email, setEmail] =
     useState("");
 
-  const [password,setPassword] =
+  const [password, setPassword] =
     useState("");
 
-  const [error,setError] =
+  const [error, setError] =
     useState("");
 
 
   async function handleSignup(
     e: React.FormEvent
-  ){
+  ) {
 
     e.preventDefault();
 
@@ -35,7 +36,8 @@ function Signup() {
         password
       );
 
-      navigate("/dashboard");
+
+      navigate("/onboarding");
 
 
     } catch {
@@ -49,13 +51,14 @@ function Signup() {
   }
 
 
-  async function handleGoogleSignup(){
+  async function handleGoogleSignup() {
 
     try {
 
       await googleLogin();
 
-      navigate("/dashboard");
+
+      navigate("/onboarding");
 
 
     } catch {
@@ -78,17 +81,21 @@ function Signup() {
       </h1>
 
 
-      {error && <p>{error}</p>}
+      {
+        error &&
+        <p>{error}</p>
+      }
 
 
-      <form onSubmit={handleSignup}>
-
+      <form
+        onSubmit={handleSignup}
+      >
 
         <input
           type="email"
           placeholder="Email"
           value={email}
-          onChange={(e)=>
+          onChange={(e) =>
             setEmail(e.target.value)
           }
         />
@@ -98,7 +105,7 @@ function Signup() {
           type="password"
           placeholder="Password"
           value={password}
-          onChange={(e)=>
+          onChange={(e) =>
             setPassword(e.target.value)
           }
         />
@@ -124,8 +131,7 @@ function Signup() {
           navigate("/login")
         }
       >
-        Already have an account?
-        Login
+        Already have an account? Login
       </button>
 
 
