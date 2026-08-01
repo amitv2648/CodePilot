@@ -11,10 +11,9 @@ import {
   import ForgotPassword from "../pages/auth/ForgotPassword";
   import Dashboard from "../pages/dashboard/Dashboard";
   import Onboarding from "../pages/onboarding/Onboarding";
-  
-  
   import ProtectedRoute from "./ProtectedRoute";
-  
+  import Layout from "../components/layout/Layout";
+  import ProfileSetup from "../pages/profile/ProfileSetup";
   
   function AppRoutes() {
   
@@ -47,6 +46,15 @@ import {
             path="/forgot-password"
             element={<ForgotPassword />}
           />
+
+          <Route
+          path="/profile-setup"
+          element={
+            <ProtectedRoute>
+            <ProfileSetup />
+            </ProtectedRoute>
+          }
+          />
   
   
           <Route
@@ -63,7 +71,9 @@ import {
             path="/dashboard"
             element={
               <ProtectedRoute>
-                <Dashboard />
+                <Layout>
+                  <Dashboard />
+                </Layout>
               </ProtectedRoute>
             }
           />

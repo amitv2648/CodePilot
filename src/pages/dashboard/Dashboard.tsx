@@ -1,120 +1,95 @@
-import { useEffect, useState } from "react";
-
-import { useAuth } from "../../context/AuthContext";
-import { getUserPreferences } from "../../services/firebase/user";
-
+import WelcomeBanner from "../../components/dashboard/WelcomeBanner";
+import StatsCard from "../../components/dashboard/StatsCard";
+import QuickActions from "../../components/dashboard/QuickActions";
+import LearningCard from "../../components/dashboard/LearningCard";
+import RecentSessions from "../../components/dashboard/RecentSessions";
 
 function Dashboard() {
-
-  const { user } = useAuth();
-
-
-  const [languages, setLanguages] =
-    useState<string[]>([]);
-
-
-  useEffect(() => {
-
-    async function loadUserData(){
-
-      if(!user) return;
-
-
-      const data =
-        await getUserPreferences(
-          user.uid
-        );
-
-
-      if(data?.selectedLanguages){
-
-        setLanguages(
-          data.selectedLanguages
-        );
-
-      }
-
-    }
-
-
-    loadUserData();
-
-  }, [user]);
-
-
   return (
+    <div className="space-y-8">
 
-    <div>
+      {/* Welcome Banner */}
+      <WelcomeBanner />
 
-      <h1>
-        Welcome back!
-      </h1>
+      {/* Stats */}
+      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
 
+        <StatsCard
+          title="Languages"
+          value="0"
+          subtitle="Languages selected"
+        />
 
-      <p>
-        {user?.email}
-      </p>
+        <StatsCard
+          title="Overall Progress"
+          value="0%"
+          subtitle="Learning completion"
+        />
 
+        <StatsCard
+          title="Sessions"
+          value="0"
+          subtitle="Coding sessions completed"
+        />
 
-      <h2>
-        Your Learning Paths
-      </h2>
+        <StatsCard
+          title="Current Streak"
+          value="🔥 0"
+          subtitle="Consecutive learning days"
+        />
 
+      </div>
 
-      {
-        languages.length === 0 ? (
+      {/* Quick Actions */}
+      <QuickActions />
 
-          <p>
-            No languages selected yet.
-          </p>
+      {/* Continue Learning */}
+      <section>
 
-        ) : (
+        <div className="mb-6 flex items-center justify-between">
 
-          languages.map(
-            (language) => (
+          <h2 className="text-2xl font-bold text-white">
+            Continue Learning
+          </h2>
 
-              <div
-                key={language}
-              >
+          <button className="text-blue-400 hover:text-blue-300">
+            View All →
+          </button>
 
-                <h3>
-                  {language}
-                </h3>
+        </div>
 
-                <p>
-                  Beginner Level
-                </p>
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
 
-                <p>
-                  Progress: 0%
-                </p>
+          <LearningCard
+            language="Python"
+            level="Beginner"
+            progress={0}
+            icon="🐍"
+          />
 
+          <LearningCard
+            language="Java"
+            level="Beginner"
+            progress={0}
+            icon="☕"
+          />
 
-              </div>
+          <LearningCard
+            language="C++"
+            level="Beginner"
+            progress={0}
+            icon="⚙️"
+          />
 
-            )
-          )
+        </div>
 
-        )
-      }
+      </section>
 
-
-
-      <h2>
-        Recent Learning Sessions
-      </h2>
-
-
-      <p>
-        No sessions started yet.
-      </p>
-
+      {/* Recent Sessions */}
+      <RecentSessions />
 
     </div>
-
   );
-
 }
-
 
 export default Dashboard;

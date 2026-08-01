@@ -3,10 +3,13 @@ import {
     useContext,
     useEffect,
     useState,
+    type ReactNode,
   } from "react";
   
-  import { onAuthStateChanged } from "firebase/auth";
-  import type { User } from "firebase/auth";
+  import {
+    onAuthStateChanged,
+    type User,
+  } from "firebase/auth";
   
   import { auth } from "../services/firebase/firebase";
   
@@ -23,33 +26,22 @@ import {
   export function AuthProvider({
     children,
   }: {
-    children: React.ReactNode;
+    children: ReactNode;
   }) {
-  
     const [user, setUser] = useState<User | null>(null);
-  
-    const [loading, setLoading] =
-      useState(true);
-  
+    const [loading, setLoading] = useState(true);
   
     useEffect(() => {
-  
-      const unsubscribe =
-        onAuthStateChanged(
-          auth,
-          (currentUser) => {
-  
-            setUser(currentUser);
-            setLoading(false);
-  
-          }
-        );
-  
+      const unsubscribe = onAuthStateChanged(
+        auth,
+        (currentUser) => {
+          setUser(currentUser);
+          setLoading(false);
+        }
+      );
   
       return unsubscribe;
-  
     }, []);
-  
   
     return (
       <AuthContext.Provider
@@ -62,7 +54,6 @@ import {
       </AuthContext.Provider>
     );
   }
-  
   
   export function useAuth() {
     return useContext(AuthContext);
