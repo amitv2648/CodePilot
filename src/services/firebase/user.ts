@@ -2,6 +2,7 @@ import {
     doc,
     setDoc,
     getDoc,
+    deleteDoc,
   } from "firebase/firestore";
   
   import { db } from "./firebase";
@@ -36,4 +37,12 @@ import {
     }
   
     return snapshot.data();
+  }
+
+  export async function deleteUserProfile(
+    userId: string
+  ) {
+    await deleteDoc(
+      doc(db, "users", userId)
+    );
   }

@@ -1,10 +1,14 @@
+import { useNavigate } from "react-router-dom";
 import type { Lesson } from "../../data/courses";
 
 type LessonViewerProps = {
+  language: string;
   lesson: Lesson;
 };
 
-function LessonViewer({ lesson }: LessonViewerProps) {
+function LessonViewer({ language, lesson }: LessonViewerProps) {
+  const navigate = useNavigate();
+
   return (
     <div className="h-full rounded-2xl border border-slate-700 bg-slate-900 p-8">
       <p className="text-sm font-semibold uppercase tracking-wider text-blue-400">
@@ -57,9 +61,15 @@ function LessonViewer({ lesson }: LessonViewerProps) {
 
       <div className="mt-8 flex gap-4">
         <button
+          type="button"
+          onClick={() =>
+            navigate(
+              `/course/${encodeURIComponent(language)}/lesson/${lesson.id}/session`,
+            )
+          }
           className="rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-500"
         >
-          Start Lesson →
+          Start Session →
         </button>
 
         <button

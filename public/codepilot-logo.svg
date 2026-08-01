@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 120" role="img" aria-labelledby="title">
+  <title id="title">CodePilot logo</title>
+  <defs>
+    <linearGradient id="codepilot-gradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2563eb" />
+      <stop offset="0.55" stop-color="#4f46e5" />
+      <stop offset="1" stop-color="#312e81" />
+    </linearGradient>
+  </defs>
+  <path
+    fill="url(#codepilot-gradient)"
+    d="M52 16 10 47v26l42 31V82L25 60l27-22V16Z"
+  />
+  <text
+    x="80"
+    y="88"
+    fill="url(#codepilot-gradient)"
+    font-family="Inter, Arial, sans-serif"
+    font-size="78"
+    font-weight="800"
+    text-anchor="middle"
+  >C</text>
+  <path
+    fill="url(#codepilot-gradient)"
+    d="m108 16 42 31v26l-42 31V82l27-22-27-22V16Z"
+  />
+</svg>

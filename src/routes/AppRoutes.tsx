@@ -15,6 +15,7 @@ import {
   import Layout from "../components/layout/Layout";
   import ProfileSetup from "../pages/profile/ProfileSetup";
   import CoursePage from "../pages/CoursePage";
+  import SessionPage from "../pages/SessionPage";
   
   function AppRoutes() {
   
@@ -85,6 +86,17 @@ import {
               <ProtectedRoute>
                 <Layout showSidebar={false}>
                   <CoursePage />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/course/:language/lesson/:lessonId/session"
+            element={
+              <ProtectedRoute>
+                <Layout showSidebar={false}>
+                  <SessionPage />
                 </Layout>
               </ProtectedRoute>
             }

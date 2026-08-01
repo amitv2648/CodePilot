@@ -4,6 +4,7 @@ import {
     GoogleAuthProvider,
     signInWithPopup,
     signOut,
+    deleteUser,
     sendPasswordResetEmail,
   } from "firebase/auth";
   
@@ -42,6 +43,14 @@ import {
   
   export const logout = () => {
     return signOut(auth);
+  };
+
+  export const deleteAccount = () => {
+    if (!auth.currentUser) {
+      throw new Error("No authenticated user was found.");
+    }
+
+    return deleteUser(auth.currentUser);
   };
   
   export const resetPassword = (

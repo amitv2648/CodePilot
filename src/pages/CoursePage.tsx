@@ -65,6 +65,7 @@ function CoursePage() {
         <div className="lg:col-span-8 xl:col-span-9">
 
           <LessonViewer
+            language={course.language}
             lesson={lesson}
           />
 

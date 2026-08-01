@@ -25,3 +25,48 @@ body {
 * {
   box-sizing: border-box;
 }
+
+html[data-theme="light"] body {
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+html[data-theme="light"] .bg-slate-950 {
+  background-color: #f8fafc;
+}
+
+html[data-theme="light"] .bg-slate-900 {
+  background-color: #ffffff;
+}
+
+html[data-theme="light"] .bg-slate-800 {
+  background-color: #e2e8f0;
+}
+
+html[data-theme="light"] .text-white {
+  color: #0f172a;
+}
+
+html[data-theme="light"] .bg-blue-400.text-white,
+html[data-theme="light"] .bg-blue-500.text-white,
+html[data-theme="light"] .bg-blue-600.text-white,
+html[data-theme="light"] .bg-red-500.text-white,
+html[data-theme="light"] .bg-red-600.text-white {
+  color: #ffffff;
+}
+
+html[data-theme="light"] .text-slate-300 {
+  color: #334155;
+}
+
+html[data-theme="light"] .text-slate-400 {
+  color: #475569;
+}
+
+html[data-theme="light"] .text-slate-500 {
+  color: #64748b;
+}
+
+html[data-theme="light"] .border-slate-700 {
+  border-color: #cbd5e1;
+}
