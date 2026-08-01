@@ -1,12 +1,12 @@
 import { FireIcon } from "@heroicons/react/24/solid";
 
-type WelcomeBannerProps = {
+type Props = {
   firstName: string;
 };
 
 function WelcomeBanner({
   firstName,
-}: WelcomeBannerProps) {
+}: Props) {
   return (
     <div className="rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-700 p-8 text-white shadow-lg">
 

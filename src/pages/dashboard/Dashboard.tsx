@@ -9,6 +9,8 @@ import RecentSessions from "../../components/dashboard/RecentSessions";
 import { useAuth } from "../../context/AuthContext";
 import { getUserProfile } from "../../services/firebase/user";
 
+import type { UserProfile } from "../../types/user";
+
 const languageIcons: Record<string, string> = {
   Python: "🐍",
   Java: "☕",
@@ -25,31 +27,42 @@ const languageIcons: Record<string, string> = {
 function Dashboard() {
   const { user } = useAuth();
 
-  const [profile, setProfile] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+  const [profile, setProfile] =
+    useState<UserProfile | null>(null);
+
+  const [loading, setLoading] =
+    useState(true);
 
   useEffect(() => {
-    async function loadProfile() {
-      if (!user) return;
+    async function loadUser() {
+      if (!user) {
+        setLoading(false);
+        return;
+      }
 
-      const data = await getUserProfile(user.uid);
+      const data =
+        await getUserProfile(user.uid);
 
-      setProfile(data);
+      if (data) {
+        setProfile(data as UserProfile);
+      }
+
       setLoading(false);
     }
 
-    loadProfile();
+    loadUser();
   }, [user]);
 
   if (loading) {
     return (
-      <p className="text-slate-400">
-        Loading dashboard...
-      </p>
+      <div className="text-center text-slate-400 py-20">
+        Loading Dashboard...
+      </div>
     );
   }
 
-  const languages = profile?.languages ?? [];
+  const languages =
+    profile?.languages ?? [];
 
   return (
     <div className="space-y-8">
@@ -104,7 +117,7 @@ function Dashboard() {
 
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
 
-          {languages.map((language: string) => (
+          {languages.map((language) => (
 
             <LearningCard
               key={language}

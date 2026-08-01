@@ -14,6 +14,7 @@ import {
   import ProtectedRoute from "./ProtectedRoute";
   import Layout from "../components/layout/Layout";
   import ProfileSetup from "../pages/profile/ProfileSetup";
+  import CoursePage from "../pages/CoursePage";
   
   function AppRoutes() {
   
@@ -74,6 +75,15 @@ import {
                 <Layout>
                   <Dashboard />
                 </Layout>
+              </ProtectedRoute>
+            }
+          />
+  
+          <Route
+            path="/course/:language"
+            element={
+              <ProtectedRoute>
+                <CoursePage />
               </ProtectedRoute>
             }
           />

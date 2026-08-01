@@ -27,13 +27,13 @@ import {
   export async function getUserProfile(
     userId: string
   ) {
-    const userDoc = await getDoc(
+    const snapshot = await getDoc(
       doc(db, "users", userId)
     );
   
-    if (userDoc.exists()) {
-      return userDoc.data();
+    if (!snapshot.exists()) {
+      return null;
     }
   
-    return null;
+    return snapshot.data();
   }
