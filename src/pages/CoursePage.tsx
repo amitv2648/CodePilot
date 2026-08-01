@@ -9,6 +9,7 @@ import ProgressHeader from "../components/courses/ProgressHeader";
 
 function CoursePage() {
   const { language } = useParams();
+  const [selectedLesson, setSelectedLesson] = useState(1);
 
   if (!language) {
     return (
@@ -27,8 +28,6 @@ function CoursePage() {
       </div>
     );
   }
-
-  const [selectedLesson, setSelectedLesson] = useState(1);
 
   const lesson =
     course.lessons.find(

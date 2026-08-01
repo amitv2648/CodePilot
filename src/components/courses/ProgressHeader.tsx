@@ -19,19 +19,19 @@ type ProgressHeaderProps = {
         : Math.round((completed / total) * 100);
   
     return (
-      <div className="rounded-2xl border border-slate-700 bg-slate-900 p-8">
+      <div className="mx-2 mt-4 rounded-2xl border border-blue-700 bg-blue-900/50 p-4 sm:mx-8">
   
         <div className="flex items-center justify-between">
   
           <div className="flex items-center gap-5">
   
-            <div className="text-6xl">
+            <div className="text-5xl">
               {icon}
             </div>
   
             <div>
   
-              <h1 className="text-4xl font-bold text-white">
+              <h1 className="text-3xl font-bold text-white">
                 {language}
               </h1>
   
@@ -49,7 +49,7 @@ type ProgressHeaderProps = {
               Progress
             </p>
   
-            <h2 className="text-3xl font-bold text-white">
+            <h2 className="text-2xl font-bold text-white">
               {progress}%
             </h2>
   
@@ -57,7 +57,7 @@ type ProgressHeaderProps = {
   
         </div>
   
-        <div className="mt-8">
+        <div className="mt-5">
   
           <div className="mb-2 flex justify-between text-sm text-slate-400">
   
@@ -71,10 +71,10 @@ type ProgressHeaderProps = {
   
           </div>
   
-          <div className="h-3 overflow-hidden rounded-full bg-slate-800">
+          <div className="h-2 overflow-hidden rounded-full bg-white">
   
             <div
-              className="h-full rounded-full bg-blue-500 transition-all duration-500"
+              className="h-full rounded-full bg-blue-400 transition-all duration-500"
               style={{
                 width: `${progress}%`,
               }}

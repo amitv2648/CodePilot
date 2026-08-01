@@ -3,8 +3,10 @@ import Sidebar from "./Sidebar";
 
 function Layout({
   children,
+  showSidebar = true,
 }: {
   children: React.ReactNode;
+  showSidebar?: boolean;
 }) {
   return (
     <div className="min-h-screen bg-slate-950">
@@ -13,9 +15,9 @@ function Layout({
 
       <div className="flex">
 
-        <Sidebar />
+        {showSidebar && <Sidebar />}
 
-        <main className="flex-1 p-8 overflow-auto">
+        <main className="flex-1 overflow-auto px-8 pb-8 pt-12">
 
           {children}
 

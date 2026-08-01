@@ -1,8 +1,4 @@
-type Lesson = {
-    id: number;
-    title: string;
-    completed: boolean;
-  };
+import type { Lesson } from "../../data/courses";
   
   type LessonSidebarProps = {
     lessons: Lesson[];

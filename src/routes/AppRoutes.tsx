@@ -83,7 +83,9 @@ import {
             path="/course/:language"
             element={
               <ProtectedRoute>
-                <CoursePage />
+                <Layout showSidebar={false}>
+                  <CoursePage />
+                </Layout>
               </ProtectedRoute>
             }
           />
