@@ -1,22 +1,68 @@
+import { useEffect, useState } from "react";
+
 import WelcomeBanner from "../../components/dashboard/WelcomeBanner";
 import StatsCard from "../../components/dashboard/StatsCard";
 import QuickActions from "../../components/dashboard/QuickActions";
 import LearningCard from "../../components/dashboard/LearningCard";
 import RecentSessions from "../../components/dashboard/RecentSessions";
 
+import { useAuth } from "../../context/AuthContext";
+import { getUserProfile } from "../../services/firebase/user";
+
+const languageIcons: Record<string, string> = {
+  Python: "🐍",
+  Java: "☕",
+  "C++": "⚙️",
+  JavaScript: "🟨",
+  TypeScript: "🔷",
+  HTML: "🌐",
+  CSS: "🎨",
+  React: "⚛️",
+  R: "📊",
+  Julia: "🟣",
+};
+
 function Dashboard() {
+  const { user } = useAuth();
+
+  const [profile, setProfile] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadProfile() {
+      if (!user) return;
+
+      const data = await getUserProfile(user.uid);
+
+      setProfile(data);
+      setLoading(false);
+    }
+
+    loadProfile();
+  }, [user]);
+
+  if (loading) {
+    return (
+      <p className="text-slate-400">
+        Loading dashboard...
+      </p>
+    );
+  }
+
+  const languages = profile?.languages ?? [];
+
   return (
     <div className="space-y-8">
 
-      {/* Welcome Banner */}
-      <WelcomeBanner />
+      <WelcomeBanner
+        firstName={profile?.firstName ?? ""}
+      />
 
-      {/* Stats */}
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
 
         <StatsCard
           title="Languages"
-          value="0"
+          value={languages.length.toString()}
           subtitle="Languages selected"
         />
 
@@ -40,10 +86,8 @@ function Dashboard() {
 
       </div>
 
-      {/* Quick Actions */}
       <QuickActions />
 
-      {/* Continue Learning */}
       <section>
 
         <div className="mb-6 flex items-center justify-between">
@@ -60,32 +104,25 @@ function Dashboard() {
 
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
 
-          <LearningCard
-            language="Python"
-            level="Beginner"
-            progress={0}
-            icon="🐍"
-          />
+          {languages.map((language: string) => (
 
-          <LearningCard
-            language="Java"
-            level="Beginner"
-            progress={0}
-            icon="☕"
-          />
+            <LearningCard
+              key={language}
+              language={language}
+              level="Beginner"
+              progress={0}
+              icon={
+                languageIcons[language] ??
+                "💻"
+              }
+            />
 
-          <LearningCard
-            language="C++"
-            level="Beginner"
-            progress={0}
-            icon="⚙️"
-          />
+          ))}
 
         </div>
 
       </section>
 
-      {/* Recent Sessions */}
       <RecentSessions />
 
     </div>
